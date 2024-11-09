@@ -30,9 +30,9 @@ private:
    //vector<Expense> expenses;
 
 public:
-    void addAmount(double amount);
+    //void addAmount(double amount);
     void addingTransaction();
-
+    string getToday();
 //    void viewExpenses() {
 //        for (const auto &expense : expenses) {
 //            cout << "Date: " << expense.date << ", Amount: " << expense.amount

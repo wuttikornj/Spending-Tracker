@@ -6,57 +6,75 @@
 //
 
 #include "Adding_Transactions.hpp"
+#include "menu.hpp"
 #include <iostream>
 #include <chrono>
 #include <thread>
 #include <regex>
 #include <string>
-using namespace std;
 
-void MoneyTracker::addingTransaction(){ // recieved from the check
+
+void MoneyTracker::addingTransaction(){ 
     char choice;
-    regex datePattern(R"(^\d{1,2}/\d{1,2}/\d{4}$)");
+    regex datePattern("^\\d{1,2}/\\d{1,2}/\\d{4}$");
+    string today = getToday();
 
-    do{                                                     // check if amount is valid NEED FIXING
+    do{ 
         cout << endl << "Adding Transaction" <<endl;
         cout << "Amount: ";
         cin >> amount;
         
-        do {                                                // check if the date is valid
+        do { 
             cout << "Date [type DD/MM/YYYY or 'Today']: ";
-            cin >> date; // Read user input
+            cin >> date; 
 
-            // Check if the input matches "Today" or the date pattern
-            if (date == "Today" || regex_match(date, datePattern)) {
+            if (date == "Today") {
+                date = today;
                 cout << "Valid input received: " << date << endl;
+                break;
+            } else if (regex_match(date, datePattern)) {
+                cout << "Valid input received: " << date << endl;
+                break;
             } else {
-                cout << "Invalid input. Please enter in DD/MM format or 'Today'." << endl;
+                cout << "Invalid input. Please enter in DD/MM/YYYY format or 'Today'." << endl;
             }
-        } while (true); // Repeat until valid input is given
+        } while (true); 
 
         cout << "Description: ";
-        cin >> description;
+        cin.ignore(); // ignore newline character left in input buffer
+        getline(cin, description);
 
-        // cout << "Category: ";            Create later
-        // cin >> category;
+        cout << "Category: ";            
+        cin >> category;
 
         cout << endl;
-        cout << "Loading";
+        cout << "Adding Transaction to Database";
         for (int i = 0; i < 4; ++i) {
-            cout << ".";                // Print a dot
-            cout.flush();               // Flush the output buffer to display the dot immediately
-            this_thread::sleep_for(chrono::milliseconds(500));  // Pause for the delay
+            cout << ".";                
+            cout.flush();               
+            this_thread::sleep_for(chrono::milliseconds(500));  
         }
         cout << "\rTransaction added successfully!";
         cout.flush();
-        cout << endl; // why not working??
+        cout << endl; 
         cout << endl;
         cout << "Do you want to add another transaction? (y/n): ";
         cin >> choice;
+        if (choice == 'n' || choice == 'N') {
+            MainMenu Display;
+            Display.menu();
+        }
     } while (choice == 'y' || choice == 'Y');
 }
 
-// void MoneyTracker::addAmount(double amount){
-    
-// }
+string MoneyTracker::getToday() {
+    time_t t = time(0);
+    tm* now = localtime(&t);
+    char buffer[11];
+    strftime(buffer, sizeof(buffer), "%d/%m/%Y", now);
+    return string(buffer);
+}
 
+/*
+saving_expense_to_file
+*/
