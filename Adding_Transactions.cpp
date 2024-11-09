@@ -48,6 +48,21 @@ void MoneyTracker::addingTransaction(){
         cin >> category;
 
         cout << endl;
+        cout << "Confirm transaction details:" << endl;
+        cout << "Date: " << date << endl;
+        cout << "Amount: " << amount << endl;
+        cout << "Description: " << description << endl;
+        cout << "Category: " << category << endl;
+        cout << "Is this correct? (y/n): ";
+        cin >> choice;
+        cout << endl;
+        if (choice == 'y') {
+            //transactions.push_back(Transaction(date, amount, description, category));
+            cout << " Confirmed and continueing." << endl;
+        } else {
+            cout << "Transaction not added." << endl;
+            }
+        cout << endl;
         cout << "Adding Transaction to Database";
         for (int i = 0; i < 4; ++i) {
             cout << ".";                
