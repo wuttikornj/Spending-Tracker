@@ -26,6 +26,8 @@ class MoneyTracker : public Expense{
 public:
     void addingTransaction();
     string getToday();
+    void viewTransactions();
+    void deleteTransaction(const int& transactionId);
 };
 
 #endif /* Adding_Transactions_hpp */

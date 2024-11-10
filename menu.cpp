@@ -20,23 +20,35 @@ void MainMenu::menu(){
     MainMenu checker1;
     checker1.checking(options);
 }
-
+MoneyTracker Tracker;
+int tempID = 0;
 void MainMenu::checking(int Num_Menu){
     switch (Num_Menu) {
         case 1: {
-            MoneyTracker Tracker;
             Tracker.addingTransaction();
             break;
         }
         case 2:
-            cout << "Functionality not implemented yet." << endl;
+            cout << endl;
+            cout << "***************************************************" << endl;
+            Tracker.viewTransactions();
+            cout << endl;
+            cout << endl;
+            cout << "***************************************************" << endl;
             break;
         case 3:
-            cout << "Functionality not implemented yet." << endl;
+            cout << endl;
+            cout << "Which transaction would you like to delete?" << endl;
+            Tracker.viewTransactions();
+            cout << endl;
+            cout << "Please enter the number of the transaction you would like to delete: ";
+            cin >> tempID;
+            Tracker.deleteTransaction(tempID);
             break;
         case 4:
             cout << endl;
             cout << "Thanks for using the Money Tracker" << endl;
+            cout << endl;
             exit(0);
         default:
             cout << "Invalid menu option." << endl;
