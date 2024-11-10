@@ -12,7 +12,7 @@
 #include <thread>
 #include <regex>
 #include <string>
-
+using namespace std;
 
 void MoneyTracker::addingTransaction(){ 
     char choice;
@@ -44,26 +44,43 @@ void MoneyTracker::addingTransaction(){
         cin.ignore(); // ignore newline character left in input buffer
         getline(cin, description);
 
-        cout << "Category: ";            
+        cout << "Category: ";
+        cout << " 🍛 1. Food" << endl;
+        cout << " 👔 2. Clothing" << endl;
+        cout << " 🚈 3. Transportation" << endl;
+        cout << " 🛒 4. Shopping" << endl;
+        cout << " 🎥 5. Entertainment" << endl;
+        cout << " 🤔 6. Other" << endl;
+        cout << "Enter your choice [1-6] : ";
         cin >> category;
+        if (category < 1 || category > 6) {
+            cout << "Invalid choice. Please enter a number between 1 and 6." << endl
+            << "Press any key to continue...";
+            cin.get();
+            continue;
+        }
+
+        
+
 
         cout << endl;
         cout << "Confirm transaction details:" << endl;
         cout << "Date: " << date << endl;
         cout << "Amount: " << amount << endl;
         cout << "Description: " << description << endl;
-        cout << "Category: " << category << endl;
+        cout << "Category: " << category << endl;  //Change so that it can display a string
         cout << "Is this correct? (y/n): ";
         cin >> choice;
         cout << endl;
         if (choice == 'y') {
-            //transactions.push_back(Transaction(date, amount, description, category));
-            cout << " Confirmed and continueing." << endl;
+            cout << "Confirmed and continueing." << endl;
         } else {
             cout << "Transaction not added." << endl;
             }
         cout << endl;
-        cout << "Adding Transaction to Database";
+        //"Adding Transaction to Database"
+
+
         for (int i = 0; i < 4; ++i) {
             cout << ".";                
             cout.flush();               
